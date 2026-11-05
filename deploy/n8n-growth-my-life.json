@@ -1,0 +1,56 @@
+{
+  "id": "GrowthMyLife001",
+  "name": "Growth my life — alertes et rappel du 1er",
+  "nodes": [
+    {
+      "parameters": { "httpMethod": "POST", "path": "growth-alerte", "responseMode": "onReceived", "options": {} },
+      "name": "Un passage a raté",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "id": "passage-rate",
+      "webhookId": "growth-alerte"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "operation": "sendLegacy",
+        "content": "=⚠️ **Growth my life** — {{ $json.body.raison }}\nLe prochain passage rattrapera la fenêtre.",
+        "options": {}
+      },
+      "name": "Prévenir de l'échec",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [240, 0],
+      "id": "prevenir-echec",
+      "credentials": { "discordWebhookApi": { "id": "A_REMPLACER", "name": "Ton webhook Discord" } }
+    },
+    {
+      "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 9 1 * *" }] } },
+      "name": "Le 1er du mois à 9 h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 200],
+      "id": "premier-du-mois"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "operation": "sendLegacy",
+        "content": "📅 **C'est le 1er** : l'heure du relevé Growth my life. Ouvre une session avec ton agent et lance `/growthmylife`.",
+        "options": {}
+      },
+      "name": "Rappeler le relevé",
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [240, 200],
+      "id": "rappel-releve",
+      "credentials": { "discordWebhookApi": { "id": "A_REMPLACER", "name": "Ton webhook Discord" } }
+    }
+  ],
+  "connections": {
+    "Un passage a raté": { "main": [[{ "node": "Prévenir de l'échec", "type": "main", "index": 0 }]] },
+    "Le 1er du mois à 9 h": { "main": [[{ "node": "Rappeler le relevé", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "timezone": "Europe/Paris" }
+}

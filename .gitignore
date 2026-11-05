@@ -1,0 +1,7 @@
+run/
+node_modules/
+front/node_modules/
+front/dist/
+.env
+*.env
+!deploy/*.env.exemple

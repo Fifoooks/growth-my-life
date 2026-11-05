@@ -1,0 +1,9 @@
+[Unit]
+Description=Growth my life — lundi, mercredi, vendredi à 4 h
+
+[Timer]
+OnCalendar=Mon,Wed,Fri *-*-* 04:00:00 Europe/Paris
+Persistent=true
+
+[Install]
+WantedBy=timers.target

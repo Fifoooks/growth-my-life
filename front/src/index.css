@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "@fontsource/saira-semi-condensed/400.css";
+@import "@fontsource/saira-semi-condensed/500.css";
+@import "@fontsource/saira-semi-condensed/600.css";
+@import "@fontsource/saira-semi-condensed/700.css";
+
+@theme {
+  --font-sans: "Saira Semi Condensed", ui-sans-serif, system-ui, sans-serif;
+  --color-fond: #0e1020;
+  --color-panneau: #14172b;
+  --color-panneau-2: #1b1f3a;
+  --color-trait: #262a4e;
+  --color-encre: #eef0fa;
+  --color-doux: #a3a9d0;
+  --color-sourd: #878ebd;
+  --color-or: #e8b64c;
+  --color-or-sombre: #3a2f17;
+  --color-pip: #7c86f0;
+  --color-corps: #ff7a6b;
+  --color-relations: #f28ac0;
+  --color-argent: #4fd1a1;
+  --color-savoir: #5aa9ff;
+  --color-caractere: #a88bfa;
+  --color-systeme: #39c6d4;
+  --color-progres: #4fd1a1;
+  --color-recul: #ff6b5e;
+  --ease-sortie: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-fond);
+    color: var(--color-encre);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum" 1;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-color: var(--color-trait) transparent;
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--color-fond);
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-or) 40%, transparent);
+    color: var(--color-encre);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-or);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  textarea,
+  input {
+    caret-color: var(--color-or);
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-trait);
+    border-radius: 8px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

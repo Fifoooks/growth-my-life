@@ -1,0 +1,9 @@
+[Unit]
+Description=Growth my life — passage de l'exécutant de nuit
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/growth-my-life.env
+WorkingDirectory=%h/growth-my-life
+ExecStartPre=/usr/bin/mkdir -p %h/growth-my-life/run
+ExecStart=/usr/bin/flock -n %h/growth-my-life/run/.verrou /usr/bin/node src/lancer-passage.mjs

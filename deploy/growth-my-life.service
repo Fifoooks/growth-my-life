@@ -1,0 +1,13 @@
+[Unit]
+Description=Growth my life — la page
+After=network-online.target
+
+[Service]
+EnvironmentFile=%h/.config/growth-my-life.env
+WorkingDirectory=%h/growth-my-life
+ExecStart=/usr/bin/node src/serveur.mjs
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
